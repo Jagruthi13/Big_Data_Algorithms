@@ -35,10 +35,5 @@ def naive_bayes_classifier(path, class_name, target):
                                   (class_label_probabilities[label])[0]
         target_label[(target_probability * (class_label_probabilities[label])[1])] = label
 
+    print(target_label)
     print(target_label[max(target_label.keys())])
-
-
-if __name__ == '__main__':
-    naive_bayes_classifier(path="../training_set.csv",
-                           class_name="buys_computer",
-                           target={'age': '>40', 'income': 'low', 'student': 'yes', 'credit_rating': 'excellent'})
