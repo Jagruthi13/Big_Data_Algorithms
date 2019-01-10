@@ -37,3 +37,14 @@ def naive_bayes_classifier(path, class_name, target):
 
     print(target_label)
     print(target_label[max(target_label.keys())])
+
+
+if __name__ == '__main__':
+    age = '>40'
+    income = 'high'
+    student = 'no'
+    credit_rating = 'excellent'
+
+    naive_bayes_classifier(path="../training_set.csv",
+                           class_name="buys_computer",
+                           target={'age': age, 'income': income, 'student': student, 'credit_rating': credit_rating})
