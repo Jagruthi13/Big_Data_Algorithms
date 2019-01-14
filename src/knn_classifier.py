@@ -2,10 +2,13 @@ import pandas as pd
 from scipy.spatial import distance
 
 
-def knn_classifier(path, target_classes, classifier, sample, k):
+def knn_classifier(path, target_classes, classifier, sample, k, type='euclidean'):
     training_set = pd.DataFrame(pd.read_csv(path))
     classes_set = training_set[target_classes]
-    training_set['dist'] = [distance.euclidean(row, sample) for row in classes_set.values]
+    if type is 'euclidean':
+        training_set['dist'] = [distance.euclidean(row, sample) for row in classes_set.values]
+    elif type is 'minkowski':
+        training_set['dist'] = [distance.minkowski(row, sample) for row in classes_set.values]
     training_set.sort_values('dist', inplace=True)
     return (training_set.iloc[:k][classifier]).value_counts().idxmax()
 
@@ -16,4 +19,4 @@ if __name__ == '__main__':
                    target_classes=['mass', 'width', 'height'],
                    classifier='fruit_name',
                    sample=(300, 7, 10),
-                   k=5))
+                   k=5, type='minkowski'))
