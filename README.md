@@ -1,5 +1,4 @@
 # Big_Data_Algorithms
-Implementation of big data algorithms. Python scripts to solve big data problems.
 
 Algorithms:
   1) Apriori Algorithm
