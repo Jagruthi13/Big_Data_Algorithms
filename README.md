@@ -3,7 +3,8 @@ Implementation of big data algorithms. Python scripts to solve big data problems
 
 Algorithms:
   1) Naive Bayes Classifier
-  2) Decision Tree (will be implementing soon)
+  2) k-Nearest Neighbour Classifier
+  3) Decision Tree (will be implementing soon)
 
 Utilities:
   1) Minimum Maximum Normalization
