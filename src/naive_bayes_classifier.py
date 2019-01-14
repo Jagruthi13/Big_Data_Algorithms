@@ -45,6 +45,6 @@ if __name__ == '__main__':
     student = 'no'
     credit_rating = 'excellent'
 
-    naive_bayes_classifier(path="../training_set.csv",
+    naive_bayes_classifier(path="../naive_bayes_training_set.csv",
                            class_name="buys_computer",
                            target={'age': age, 'income': income, 'student': student, 'credit_rating': credit_rating})
