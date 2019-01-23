@@ -1,4 +1,4 @@
-# Big_Data_Algorithms
+# Big Data Algorithms
 
 ## Algorithms:
   1) Apriori Algorithm
