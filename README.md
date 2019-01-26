@@ -2,8 +2,8 @@
 
 Algorithms:
   1) Apriori Algorithm
-  2) Naive Bayes Classifier
-  3) k-Nearest Neighbour Classifier
+  2) Naive Bayes Classification
+  3) k-Nearest Neighbour Classification
   4) Decision Tree (will be implementing soon)
 
 Utilities:
