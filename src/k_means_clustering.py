@@ -53,7 +53,7 @@ def k_means_clustering(path, k):
                 size=10,
                 color='#000000',
             ),
-            name='Centroid of Clusters'
+            name='Centroids of Clusters'
         )
     )
 
@@ -61,4 +61,4 @@ def k_means_clustering(path, k):
 
 
 if __name__ == '__main__':
-    k_means_clustering(path='../datasets/k_means_clustering_test_2.csv', k=4)
+    k_means_clustering(path='../datasets/k_means_clustering_test_1.csv', k=7)
