@@ -61,4 +61,4 @@ def k_means_clustering(path, k):
 
 
 if __name__ == '__main__':
-    k_means_clustering(path='../datasets/knn_clustering_test_2.csv', k=4)
+    k_means_clustering(path='../datasets/k_means_clustering_test_2.csv', k=4)
