@@ -44,8 +44,8 @@ def k_means_clustering(path, k):
         name='Cluster: ' + str(c)
     ) for c in range(k)]
 
-    plt.plot(data_graph, filename='Cluster.html')
+    plt.plot(data_graph, filename='../output_files/cluster.html')
 
 
 if __name__ == '__main__':
-    k_means_clustering(path='../datasets/knn_clustering_test_2.csv', k=4)
+    k_means_clustering(path='../datasets/knn_clustering_test_1.csv', k=7)
