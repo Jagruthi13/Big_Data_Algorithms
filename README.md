@@ -11,3 +11,8 @@
   1) Minimum Maximum Normalization
   2) ZScore Normalization
   3) Binning by medians, means and boundaries
+
+## K Means clustering output for two different data sets:
+
+![alt text](https://raw.githubusercontent.com/karankharecha/Big_Data_Algorithms/master/output_files/knn_clustering_test_1.png)
+![alt text](https://raw.githubusercontent.com/karankharecha/Big_Data_Algorithms/master/output_files/knn_clustering_test_2.png)
