@@ -14,5 +14,9 @@
 
 ## K Means clustering output for two different data sets: (<a href="https://github.com/karankharecha/Big_Data_Algorithms/blob/master/datasets/knn_clustering_test_1.csv">Dataset 1</a>) (<a href="https://github.com/karankharecha/Big_Data_Algorithms/blob/master/datasets/knn_clustering_test_2.csv">Dataset 2</a>)
 
-![alt text](https://raw.githubusercontent.com/karankharecha/Big_Data_Algorithms/master/output_files/knn_clustering_test_1.png)
-![alt text](https://raw.githubusercontent.com/karankharecha/Big_Data_Algorithms/master/output_files/knn_clustering_test_2.png)
+![alt text](https://raw.githubusercontent.com/karankharecha/Big_Data_Algorithms/master/output_files/k_means_clustering_test_1.png)
+![alt text](https://raw.githubusercontent.com/karankharecha/Big_Data_Algorithms/master/output_files/k_means_clustering_test_2.png)
+
+## kNN classification output: (<a href="https://github.com/karankharecha/Big_Data_Algorithms/blob/master/datasets/knn_training_set.csv">Dataset</a>)
+
+![alt text](https://raw.githubusercontent.com/karankharecha/Big_Data_Algorithms/master/output_files/knn_classification.png)
