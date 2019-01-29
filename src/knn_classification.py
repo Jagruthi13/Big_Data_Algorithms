@@ -29,6 +29,19 @@ def knn_classifier(path, target_classes, classifier, sample, k):
         name='New sample'
     )]
 
+    graph_layout = go.Layout(
+        scene=dict(
+            xaxis=dict(
+                title='mass'),
+            yaxis=dict(
+                title='width'),
+            zaxis=dict(
+                title='height'), ),
+        margin=dict(b=10, l=10, t=10)
+    )
+
+    data_graph = go.Figure(data=data_graph, layout=graph_layout)
+
     plt.plot(data_graph, filename='../output_files/knn_classification.html')
 
     training_set['dist'] = (classes_set[target_classes] - np.array(sample)).pow(2).sum(1).pow(0.5)
