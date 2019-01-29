@@ -12,7 +12,7 @@ def knn_classifier(path, target_classes, classifier, sample, k):
 
 if __name__ == '__main__':
     pd.set_option('display.max_columns', 10)
-    print(knn_classifier(path="../knn_training_set.csv",
+    print(knn_classifier(path="../datasets/knn_training_set.csv",
                          target_classes=['mass', 'width', 'height'],
                          classifier='fruit_name',
                          sample=(300, 7, 10),

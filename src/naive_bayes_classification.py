@@ -17,14 +17,15 @@ def naive_bayes_classifier(path, class_name, target):
     # generate unique values of class
     class_name_values = {class_name: unique_attributes_values.pop(class_name)}
 
-    print("class_name_values: ", class_name_values)
-    print("unique_attributes_values: ", unique_attributes_values)
+    # print class name values and unique attributes
+    # print("class_name_values: ", class_name_values)
+    # print("unique_attributes_values: ", unique_attributes_values)
 
     # get probabilities of class values
     class_label_probabilities = dict(collections.Counter(np.array(training_set[class_name])))
     for attr, count in class_label_probabilities.items():
         class_label_probabilities[attr] = [count, count / training_set[class_name].size]
-    print(class_label_probabilities)
+    # print(class_label_probabilities)
 
     # generating probabilities for other attributes
     for label in class_label_probabilities.keys():
@@ -45,6 +46,6 @@ if __name__ == '__main__':
     student = 'no'
     credit_rating = 'excellent'
 
-    naive_bayes_classifier(path="../naive_bayes_training_set.csv",
+    naive_bayes_classifier(path="../datasets/naive_bayes_training_set.csv",
                            class_name="buys_computer",
                            target={'age': age, 'income': income, 'student': student, 'credit_rating': credit_rating})
