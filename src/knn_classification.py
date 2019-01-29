@@ -31,12 +31,10 @@ def knn_classifier(path, target_classes, classifier, sample, k):
 
     graph_layout = go.Layout(
         scene=dict(
-            xaxis=dict(
-                title='mass'),
-            yaxis=dict(
-                title='width'),
-            zaxis=dict(
-                title='height'), ),
+            xaxis=dict(title='mass'),
+            yaxis=dict(title='width'),
+            zaxis=dict(title='height')
+        ),
         margin=dict(b=10, l=10, t=10)
     )
 
