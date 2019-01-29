@@ -9,6 +9,7 @@ pd.set_option('display.max_columns', 10)
 
 def k_means_clustering(path, k):
     data = pd.read_csv(path)
+    data = data[['V1','V2']]
     k_means = (data.sample(k, replace=False))
     k_means2 = pd.DataFrame()
     clusters = pd.DataFrame()
@@ -35,6 +36,7 @@ def k_means_clustering(path, k):
         print(k_means.equals(k_means2))
 
     # plotting
+    print('Plotting...')
     data_graph = [go.Scatter(
         x=data['V1'],
         y=data['V2'].where(data['MDCluster'] == c),
@@ -46,4 +48,4 @@ def k_means_clustering(path, k):
 
 
 if __name__ == '__main__':
-    k_means_clustering(path='../k_means_V1V2.csv', k=3)
+    k_means_clustering(path='../datasets/knn_clustering_test_2.csv', k=4)
