@@ -44,8 +44,21 @@ def k_means_clustering(path, k):
         name='Cluster: ' + str(c)
     ) for c in range(k)]
 
+    data_graph.append(
+        go.Scatter(
+            x=k_means['V1'],
+            y=k_means['V2'],
+            mode='markers',
+            marker=dict(
+                size=10,
+                color='#000000',
+            ),
+            name='Centroid of Clusters'
+        )
+    )
+
     plt.plot(data_graph, filename='../output_files/cluster.html')
 
 
 if __name__ == '__main__':
-    k_means_clustering(path='../datasets/knn_clustering_test_1.csv', k=7)
+    k_means_clustering(path='../datasets/knn_clustering_test_2.csv', k=4)
