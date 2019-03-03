@@ -1,4 +1,5 @@
 import numpy as np
+from scipy import stats
 
 
 def min_max(data, new_min, new_max):
@@ -11,7 +12,10 @@ def min_max(data, new_min, new_max):
 
 
 def z_score(data):
-    return {v: np.round((v - np.mean(data)) / np.std(data), 3) for v in data}
+    data = np.asarray(data)
+    data_mean = data.mean()
+    data_std = data.std()
+    return (data - data_mean) / data_std
 
 
 if __name__ == '__main__':
