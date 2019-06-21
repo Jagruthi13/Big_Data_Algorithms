@@ -2,14 +2,13 @@ import pandas as pd
 import numpy as np
 import plotly.offline as plt
 import plotly.graph_objs as go
-import sys
 
 pd.set_option('display.max_columns', 10)
 
 
 def k_means_clustering(path, k):
     data = pd.read_csv(path)
-    data = data[['V1','V2']]
+    data = data[['V1', 'V2']]
     k_means = (data.sample(k, replace=False))
     k_means2 = pd.DataFrame()
     clusters = pd.DataFrame()
