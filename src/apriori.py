@@ -1,61 +1,39 @@
-from itertools import chain, combinations
-
-support_count_dict = dict()
-subsets = dict()
-sup_items_dict = dict()
-
-
-def generate_subsets():
-    for subset in chain(*map(lambda x: combinations(sup_items_dict.keys(), x), range(1, len(sup_items_dict.keys()) + 1))):
-        if len(subset) not in subsets.keys():
-            subsets[len(subset)] = set()
-        (subsets[len(subset)]).add(subset)
+from itertools import combinations
+from operator import itemgetter
+import pandas as pd
+from time import time
 
 
 def perform_apriori(data, support_count):
-    items_dict = dict()
-    for value in data.values():
-        for item in value:
-            if item in items_dict.keys():
-                items_dict[item] += 1
-                if items_dict[item] >= support_count:
-                    sup_items_dict[item] = items_dict[item]
-            else:
-                items_dict[item] = 1
 
-    generate_subsets()
+    single_items = (data['items'].str.split(",", expand=True))\
+        .apply(pd.value_counts).sum(axis=1).where(lambda value: value > support_count).dropna()
 
-    for total_items in range(1, len(subsets) + 1):
-        for s in subsets[total_items]:
-            scount = 0
-            for items in data.values():
-                if set(s).issubset(items):
-                    scount += 1
-            if scount >= support_count:
-                if total_items not in support_count_dict:
-                    support_count_dict[total_items] = dict()
-                key = "(" + ", ".join(s) + ")"
-                if str(s) in support_count_dict[total_items].keys():
-                    (support_count_dict[total_items])[key].add({key: scount})
-                else:
-                    (support_count_dict[total_items])[key] = scount
+    apriori_data = pd.DataFrame(
+        {'items': single_items.index.astype(int), 'support_count': single_items.values, 'set_size': 1})
 
-    for k, v in support_count_dict.items():
-        print(k, v)
-    return support_count_dict
+    data['set_size'] = data['items'].str.count(",") + 1
+
+    data['items'] = data['items'].apply(lambda row: set(map(int, row.split(","))))
+
+    single_items_set = set(single_items.index.astype(int))
+
+    for length in range(2, len(single_items_set) + 1):
+        data = data[data['set_size'] >= length]
+        d = data['items'] \
+            .apply(lambda st: pd.Series(s if set(s).issubset(st) else None for s in combinations(single_items_set, length))) \
+            .apply(lambda col: [col.dropna().unique()[0], col.count()] if col.count() >= support_count else None).dropna()
+        if d.empty:
+            break
+        apriori_data = apriori_data.append(pd.DataFrame(
+            {'items': list(map(itemgetter(0), d.values)), 'support_count': list(map(itemgetter(1), d.values)),
+             'set_size': length}), ignore_index=True)
+
+    return apriori_data
 
 
 if __name__ == '__main__':
-    sup_count = 3
-    table = {
-        't1': {'i1', 'i2', 'i5'},
-        't2': {'i2', 'i4'},
-        't3': {'i2', 'i3'},
-        't4': {'i1', 'i2', 'i4'},
-        't5': {'i1', 'i3'},
-        't6': {'i2', 'i3'},
-        't7': {'i1', 'i3'},
-        't8': {'i1', 'i2', 'i3', 'i5'},
-        't9': {'i1', 'i2', 'i3'},
-    }
-    perform_apriori(data=table, support_count=sup_count)
+    table = pd.read_csv('../datasets/sampledata_numbers.csv')
+    start = time()
+    print(perform_apriori(data=table, support_count=500))
+    print(time() - start)
