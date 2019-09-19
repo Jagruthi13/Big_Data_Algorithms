@@ -2,10 +2,12 @@
 
 ## Algorithms:
   1) Apriori Algorithm
-  2) Naive Bayes Classification
+  2) Simple Naive Bayes Classification
+  3) Gaussian Naive Bayes Classification
   3) k-Nearest Neighbour Classification
   4) k-Means Clustering
-  5) Decision Tree (will be implementing soon)
+  5) Simple Linear Regression
+  6) Decision Tree (will be implementing soon)
 
 ## Utilities:
   1) Minimum Maximum Normalization

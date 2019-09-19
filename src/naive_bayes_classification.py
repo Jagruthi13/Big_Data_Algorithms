@@ -1,51 +1,37 @@
 import pandas as pd
-import collections
-import numpy as np
+
+frequency_table = None
+prob_classes = None
+c = None
 
 
-def naive_bayes_classifier(path, class_name, target):
-    unique_attributes_values = dict()
-    class_label_probabilities = dict()
-    attributes_label_probabilities = dict()
-    target_label = dict()
-    training_set = pd.DataFrame(pd.read_csv(path))
+def naive_bayes_classifier(data, class_name):
+    global c, prob_classes, frequency_table
+    c = data[class_name].value_counts()
 
-    # get all attributes and it's unique values
-    for attr in training_set.keys():
-        unique_attributes_values[attr] = np.unique(training_set[attr].values)
+    prob_classes = data[class_name].value_counts() / data[class_name].size
 
-    # generate unique values of class
-    class_name_values = {class_name: unique_attributes_values.pop(class_name)}
+    features_cols = data.drop(class_name, axis=1).columns.values
+    frequencies = [data.groupby([col, class_name]).size() for col in features_cols]
 
-    # print class name values and unique attributes
-    # print("class_name_values: ", class_name_values)
-    # print("unique_attributes_values: ", unique_attributes_values)
+    frequency_table = pd.concat(frequencies, keys=features_cols)
 
-    # get probabilities of class values
-    class_label_probabilities = dict(collections.Counter(np.array(training_set[class_name])))
-    for attr, count in class_label_probabilities.items():
-        class_label_probabilities[attr] = [count, count / training_set[class_name].size]
-    # print(class_label_probabilities)
 
-    # generating probabilities for other attributes
-    for label in class_label_probabilities.keys():
-        target_probability = 1
-        for attr_key, attr_value in target.items():
-            target_probability *= len(
-                training_set[(training_set[attr_key] == attr_value) & (training_set[class_name] == label)]) / \
-                                  (class_label_probabilities[label])[0]
-        target_label[(target_probability * (class_label_probabilities[label])[1])] = label
+def predict(features):
+    temp_frequency_table = frequency_table.loc[:, features]
 
-    print(target_label)
-    print(target_label[max(target_label.keys())])
+    class_pred = pd.Series(index=c.index)
+
+    for idx in range(len(c.index)):
+        temp_frequency_table.loc[:, :, c.index[idx]] = temp_frequency_table.loc[:, :, c.index[idx]] / c[idx]
+        class_pred[c.index[idx]] = temp_frequency_table[:, :, c.index[idx]].product() * prob_classes[c.index[idx]]
+
+    return class_pred.idxmax()
 
 
 if __name__ == '__main__':
-    age = '>40'
-    income = 'high'
-    student = 'no'
-    credit_rating = 'excellent'
-
-    naive_bayes_classifier(path="../datasets/naive_bayes_training_set.csv",
-                           class_name="buys_computer",
-                           target={'age': age, 'income': income, 'student': student, 'credit_rating': credit_rating})
+    data = pd.read_csv("../datasets/naive_bayes_training_set.csv")
+    naive_bayes_classifier(data=data, class_name='buys_computer')
+    print(
+        predict(features=['<30', 'medium', 'yes', 'fair'])
+    )
